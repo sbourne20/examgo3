@@ -21,8 +21,8 @@ type App struct {
 }
 
 func (a *App) Initialize(user, password, dbname string) {
-	//connectionString := fmt.Sprintf("%s:%s@tcp(rm-d9jxms81910c50lvi.mysql.ap-southeast-5.rds.aliyuncs.com:3306)/%s?charset=utf8&parseTime=True", user, password, dbname)
-	connectionString := fmt.Sprintf("%s:%s@tcp(192.168.8.32:3306)/%s?charset=utf8&parseTime=True", user, password, dbname)
+	connectionString := fmt.Sprintf("%s:%s@tcp(rm-d9jxms81910c50lvi.mysql.ap-southeast-5.rds.aliyuncs.com:3306)/%s?charset=utf8&parseTime=True", user, password, dbname)
+	//connectionString := fmt.Sprintf("%s:%s@tcp(192.168.8.32:3306)/%s?charset=utf8&parseTime=True", user, password, dbname)
 
 	var err error
 	a.DB, err = sql.Open("mysql", connectionString)
