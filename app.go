@@ -41,7 +41,7 @@ func (a *App) Run(addr string) {
 
 func (a *App) initializeRoutes() {
 	a.Router.HandleFunc("/testAgent", a.testAgents).Methods("GET")
-	a.Router.HandleFunc("/getNews", a.testAgents).Methods("GET")
+	a.Router.HandleFunc("/getNews/{id}", a.getNews).Methods("GET")
 	a.Router.HandleFunc("/users", a.getUsers).Methods("GET")
 	a.Router.HandleFunc("/user", a.createUser).Methods("POST")
 	a.Router.HandleFunc("/user", a.createUser).Methods("PUT")
@@ -53,20 +53,21 @@ func (a *App) testAgents(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) getNews(w http.ResponseWriter, r *http.Request) {
-	//var news news
-	//fmt.printf (news)
+	vars := mux.Vars(r)
+	var newsx = models.RetrieveNews(vars["id"])
+	fmt.Fprintf(w, newsx)
 }
 
 func (a *App) getUsers(w http.ResponseWriter, r *http.Request) {
 
 	//user, err := users.GetUsers(a.DB)
-	models, err := users.GetUsers(a.DB)
+	models, err := models.GetUsers(a.DB)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	respondWithJSON(w, http.StatusOK, user)
+	respondWithJSON(w, http.StatusOK, models)
 }
 
 func (a *App) createUser(w http.ResponseWriter, r *http.Request) {
