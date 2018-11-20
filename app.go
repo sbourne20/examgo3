@@ -21,7 +21,8 @@ type App struct {
 }
 
 func (a *App) Initialize(user, password, dbname string) {
-	connectionString := fmt.Sprintf("%s:%s@tcp(rm-d9jxms81910c50lvi.mysql.ap-southeast-5.rds.aliyuncs.com:3306)/%s?charset=utf8&parseTime=True", user, password, dbname)
+	//connectionString := fmt.Sprintf("%s:%s@tcp(rm-d9jxms81910c50lvi.mysql.ap-southeast-5.rds.aliyuncs.com:3306)/%s?charset=utf8&parseTime=True", user, password, dbname)
+	connectionString := fmt.Sprintf("%s:%s@tcp(192.168.8.32:3306)/%s?charset=utf8&parseTime=True", user, password, dbname)
 
 	var err error
 	a.DB, err = sql.Open("mysql", connectionString)
@@ -42,7 +43,7 @@ func (a *App) initializeRoutes() {
 	a.Router.HandleFunc("/getNews/{id}", a.getNews).Methods("GET")
 	a.Router.HandleFunc("/users", a.getUsers).Methods("GET")
 	a.Router.HandleFunc("/user", a.createUser).Methods("POST")
-	a.Router.HandleFunc("/user", a.createUser).Methods("PUT")
+	a.Router.HandleFunc("/user/{id}", a.updateUser).Methods("PUT")
 	a.Router.HandleFunc("/user/{id}", a.deleteUser).Methods("DELETE")
 }
 
@@ -88,7 +89,7 @@ func (a *App) createUser(w http.ResponseWriter, r *http.Request) {
 
 func (a *App) updateUser(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["Id_pengguna"])
+	id, err := strconv.Atoi(vars["id"])
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid user ID")
 		return
