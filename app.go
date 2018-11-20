@@ -11,6 +11,7 @@ import (
 	"strconv"
 
 	"github.com/sbourne20/examgo3/models"
+	"github.com/sbourne20/examgo3/news"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
@@ -40,6 +41,7 @@ func (a *App) Run(addr string) {
 
 func (a *App) initializeRoutes() {
 	a.Router.HandleFunc("/testAgent", a.testAgents).Methods("GET")
+	a.Router.HandleFunc("/getNews", a.testAgents).Methods("GET")
 	a.Router.HandleFunc("/users", a.getUsers).Methods("GET")
 	a.Router.HandleFunc("/user", a.createUser).Methods("POST")
 	a.Router.HandleFunc("/user", a.createUser).Methods("PUT")
@@ -49,6 +51,11 @@ func (a *App) initializeRoutes() {
 func (a *App) testAgents(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
 }
+
+func (a *App) getNews(w http.ResponseWriter, r *http.Request) {
+	var news news
+	fmt.printf (news)
+)
 
 func (a *App) getUsers(w http.ResponseWriter, r *http.Request) {
 

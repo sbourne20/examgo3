@@ -1,10 +1,6 @@
 package news
 
-import (
-	"fmt"
-)
-
-func retrieveNews() string {
-	statement = fmt.Sprintf("Test")
+func retrieveNews(news string) string {
+	statement = "retrieve this ".news
 	return statement
 }
