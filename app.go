@@ -10,8 +10,6 @@ import (
 	"net/http"
 	"strconv"
 
-	//"github.com/sbourne20/examgo3/models/news"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/sbourne20/examgo3/models"
