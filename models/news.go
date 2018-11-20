@@ -1,6 +1,8 @@
-package news
+package models
+
+import "fmt"
 
 func retrieveNews(news string) string {
-	statement = "retrieve this ".news
+	var statement = fmt.Sprintf("retrieve this ", news)
 	return statement
 }

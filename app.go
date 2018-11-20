@@ -10,11 +10,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/sbourne20/examgo3/models"
-	"github.com/sbourne20/examgo3/news"
+	//"github.com/sbourne20/examgo3/models/news"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
+	"github.com/sbourne20/examgo3/models"
 )
 
 type App struct {
@@ -53,13 +53,14 @@ func (a *App) testAgents(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) getNews(w http.ResponseWriter, r *http.Request) {
-	var news news
-	fmt.printf (news)
-)
+	//var news news
+	//fmt.printf (news)
+}
 
 func (a *App) getUsers(w http.ResponseWriter, r *http.Request) {
 
-	user, err := users.GetUsers(a.DB)
+	//user, err := users.GetUsers(a.DB)
+	models, err := users.GetUsers(a.DB)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -69,7 +70,8 @@ func (a *App) getUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func (a *App) createUser(w http.ResponseWriter, r *http.Request) {
-	var u users.User
+	//var u users.User
+	var u models.User
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&u); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
@@ -93,7 +95,8 @@ func (a *App) updateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var u users.User
+	//var u users.User
+	var u models.User
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&u); err != nil {
 		respondWithError(w, http.StatusBadRequest, "Invalid resquest payload")
@@ -118,7 +121,8 @@ func (a *App) deleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	u := users.User{Idpengguna: id}
+	//u := users.User{Idpengguna: id}
+	u := models.User{Idpengguna: id}
 	if err := u.DeleteUser(a.DB); err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
