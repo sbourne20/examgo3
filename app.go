@@ -10,7 +10,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"./models"
+	"bit-clicks.com/models_bkd"
+
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 )
